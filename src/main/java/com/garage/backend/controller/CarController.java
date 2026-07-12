@@ -2,6 +2,7 @@ package com.garage.backend.controller;
 
 import com.garage.backend.entity.Car;
 import com.garage.backend.service.CarService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,13 +47,13 @@ public class CarController {
     }
 
     @PostMapping
-    public ResponseEntity<Car> createCar(@RequestBody Car car) {
+    public ResponseEntity<Car> createCar(@Valid @RequestBody Car car) {
         Car createdCar = carService.createCar(car);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCar);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Car> updateCar(@PathVariable Long id, @RequestBody Car carDetails) {
+    public ResponseEntity<Car> updateCar(@PathVariable Long id, @Valid @RequestBody Car carDetails) {
         Car updatedCar = carService.updateCar(id, carDetails);
         return ResponseEntity.ok(updatedCar);
     }
